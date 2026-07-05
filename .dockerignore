@@ -1,0 +1,10 @@
+.git
+dist/
+ffgo
+ffgo.exe
+*.out
+coverage.txt
+coverage.html
+testdata/*.gif
+docs/
+examples/

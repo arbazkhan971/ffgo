@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 470" width="780" height="470" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">
+  <defs>
+    <style>
+      @keyframes fill { 0%{width:0} 55%{width:250px} 100%{width:250px} }
+      @keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+      .cursor { animation: blink 1s steps(1) infinite; }
+      .bar { animation: fill 3.2s ease-out infinite; }
+    </style>
+  </defs>
+
+  <!-- window -->
+  <rect x="0" y="0" width="780" height="470" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <rect x="0" y="0" width="780" height="38" rx="12" fill="#161b22"/>
+  <rect x="0" y="26" width="780" height="12" fill="#161b22"/>
+  <circle cx="22" cy="19" r="6" fill="#ff5f56"/>
+  <circle cx="42" cy="19" r="6" fill="#ffbd2e"/>
+  <circle cx="62" cy="19" r="6" fill="#27c93f"/>
+  <text x="390" y="24" text-anchor="middle" fill="#8b949e" font-size="13">ffgo — FFmpeg for humans</text>
+
+  <!-- run 1: compress -->
+  <text x="24" y="82" fill="#7ee787">$ <tspan fill="#e6edf3">ffgo compress vacation.mp4 </tspan><tspan fill="#79c0ff">--target 25mb</tspan></text>
+
+  <rect x="24" y="98" width="250" height="14" rx="4" fill="#21262d"/>
+  <rect class="bar" x="24" y="98" width="250" height="14" rx="4" fill="#39c5cf"/>
+  <text x="286" y="110" fill="#e6edf3">78%<tspan fill="#8b949e">  Compressing vacation.mp4   ETA 0:03</tspan></text>
+
+  <text x="24" y="146" fill="#56d364">✓ <tspan fill="#e6edf3">Compressed </tspan><tspan fill="#8b949e">212 MB → </tspan><tspan fill="#e6edf3">24.6 MB </tspan><tspan fill="#56d364">(88% smaller)</tspan><tspan fill="#8b949e"> → vacation_compressed.mp4</tspan></text>
+
+  <!-- run 2: gif -->
+  <text x="24" y="196" fill="#7ee787">$ <tspan fill="#e6edf3">ffgo gif demo.mov </tspan><tspan fill="#79c0ff">--from 0:10 --to 0:15 --width 480</tspan></text>
+  <text x="24" y="226" fill="#56d364">✓ <tspan fill="#e6edf3">GIF written to demo.gif </tspan><tspan fill="#8b949e">(1.8 MB)</tspan></text>
+
+  <!-- run 3: inspect -->
+  <text x="24" y="276" fill="#7ee787">$ <tspan fill="#e6edf3">ffgo inspect movie.mkv</tspan></text>
+  <text x="24" y="306" fill="#e6edf3">🎬 movie.mkv  <tspan fill="#8b949e">h264 · 1080p · 24fps · 8.2 GB</tspan></text>
+  <text x="24" y="332" fill="#f2cc60">💡 <tspan fill="#8b949e">Large file — shrink it with </tspan><tspan fill="#39c5cf">ffgo compress movie.mkv --target 1gb</tspan></text>
+
+  <!-- run 4: ai -->
+  <text x="24" y="382" fill="#7ee787">$ <tspan fill="#e6edf3">ffgo ai </tspan><tspan fill="#a5d6ff">"make this a 480p mp4 for the web"</tspan><tspan fill="#e6edf3"> clip.mov</tspan></text>
+  <text x="24" y="412" fill="#d2a8ff">🤖 <tspan fill="#8b949e">ffmpeg -i clip.mov -vf scale=-2:480 -c:v libx264 -crf 23 clip_web.mp4</tspan></text>
+  <text x="24" y="440" fill="#56d364">✓ <tspan fill="#e6edf3">Done </tspan><tspan fill="#8b949e">→ clip_web.mp4</tspan><tspan class="cursor" fill="#e6edf3"> ▋</tspan></text>
+</svg>

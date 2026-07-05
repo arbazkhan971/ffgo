@@ -1,0 +1,107 @@
+# GoReleaser configuration for ffgo.
+# Docs: https://goreleaser.com
+version: 2
+
+project_name: ffgo
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ffgo
+    main: .
+    binary: ffgo
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X github.com/arbazkhan971/ffgo/internal/buildinfo.Version={{.Version}}
+      - -X github.com/arbazkhan971/ffgo/internal/buildinfo.Commit={{.ShortCommit}}
+      - -X github.com/arbazkhan971/ffgo/internal/buildinfo.Date={{.Date}}
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  name_template: checksums.txt
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  use: github
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "Merge pull request"
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\(.+\))??!?:.+$'
+      order: 0
+    - title: Bug fixes
+      regexp: '^.*?fix(\(.+\))??!?:.+$'
+      order: 1
+    - title: Other
+      order: 999
+
+brews:
+  - name: ffgo
+    repository:
+      owner: arbazkhan971
+      name: homebrew-tap
+    homepage: https://github.com/arbazkhan971/ffgo
+    description: FFmpeg for humans — inspect, convert, compress and edit video with sane commands
+    license: MIT
+    dependencies:
+      - name: ffmpeg
+    test: |
+      system "#{bin}/ffgo", "version"
+    commit_author:
+      name: goreleaserbot
+      email: bot@goreleaser.com
+
+scoops:
+  - repository:
+      owner: arbazkhan971
+      name: scoop-bucket
+    homepage: https://github.com/arbazkhan971/ffgo
+    description: FFmpeg for humans — inspect, convert, compress and edit video with sane commands
+    license: MIT
+
+nfpms:
+  - id: packages
+    package_name: ffgo
+    homepage: https://github.com/arbazkhan971/ffgo
+    description: FFmpeg for humans — inspect, convert, compress and edit video with sane commands
+    maintainer: Arbaz Khan <arbaz.khan@lineupx.com>
+    license: MIT
+    formats: [deb, rpm, apk]
+    recommends:
+      - ffmpeg
+
+release:
+  github:
+    owner: arbazkhan971
+    name: ffgo
+  draft: false
+  prerelease: auto
+  footer: |
+    ---
+    Made with ffgo — FFmpeg for humans.

@@ -1,0 +1,20 @@
+name: 💡 Feature request
+description: Suggest a command, flag or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the task, ideally the FFmpeg command you use today.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would the ffgo command look like?
+      placeholder: "ffgo speed input.mp4 --factor 2x"
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?

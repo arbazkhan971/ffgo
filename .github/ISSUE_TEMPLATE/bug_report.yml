@@ -1,0 +1,37 @@
+name: 🐛 Bug report
+description: Something didn't work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you run, and what went wrong?
+      placeholder: "ffgo compress clip.mp4 --target 25mb  →  ..."
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: The FFmpeg command ffgo generated
+      description: Re-run with `--show-command` (or `--dry-run`) and paste it here.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: ffgo version
+      description: Output of `ffgo version`
+    validations:
+      required: true
+  - type: input
+    id: ffmpeg
+    attributes:
+      label: FFmpeg version
+      description: Output of `ffmpeg -version` (first line)
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Linux, macOS, Windows, Other]
+    validations:
+      required: true

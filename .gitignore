@@ -1,0 +1,25 @@
+# Binaries
+/ffgo
+/ffgo.exe
+/dist/
+/bin/
+
+# Test artifacts
+*.out
+coverage.txt
+coverage.html
+
+# ffgo scratch outputs from local runs
+*_compressed.*
+*_trim.*
+*_normalized.*
+*_nosilence.*
+*_subbed.*
+testdata/*.gif
+!testdata/.gitkeep
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
