@@ -6,6 +6,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-07-05
+
+First public release.
+
 ### Added
 - `inspect` — readable media summary (codecs, resolution, bitrate, tracks,
   HDR, metadata) with smart recommendations, plus `--json` for raw ffprobe.
@@ -23,4 +27,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Global `--dry-run`, `--show-command`, `-y`, `-q`, `--color`.
 - Live progress bars, colorized output, and a zero-dependency UI layer.
 
-[Unreleased]: https://github.com/arbazkhan971/ffgo/commits/main
+[Unreleased]: https://github.com/arbazkhan971/ffgo/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/arbazkhan971/ffgo/releases/tag/v0.1.0
