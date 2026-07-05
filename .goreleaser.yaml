@@ -61,26 +61,36 @@ changelog:
     - title: Other
       order: 999
 
-brews:
+homebrew_casks:
   - name: ffgo
+    # Publish only when a tap token is configured; otherwise the cask is still
+    # generated as a release artifact but not pushed to the tap repo.
+    skip_upload: '{{ if eq (envOrDefault "HOMEBREW_TAP_GITHUB_TOKEN" "") "" }}true{{ else }}false{{ end }}'
     repository:
       owner: arbazkhan971
       name: homebrew-tap
+      token: '{{ envOrDefault "HOMEBREW_TAP_GITHUB_TOKEN" "" }}'
     homepage: https://github.com/arbazkhan971/ffgo
     description: FFmpeg for humans — inspect, convert, compress and edit video with sane commands
-    license: MIT
     dependencies:
-      - name: ffmpeg
-    test: |
-      system "#{bin}/ffgo", "version"
+      - formula: ffmpeg
     commit_author:
       name: goreleaserbot
       email: bot@goreleaser.com
+    # Strip the quarantine flag so the unsigned binary runs without a Gatekeeper prompt.
+    hooks:
+      post:
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/ffgo"]
+          end
 
 scoops:
-  - repository:
+  - skip_upload: '{{ if eq (envOrDefault "HOMEBREW_TAP_GITHUB_TOKEN" "") "" }}true{{ else }}false{{ end }}'
+    repository:
       owner: arbazkhan971
       name: scoop-bucket
+      token: '{{ envOrDefault "HOMEBREW_TAP_GITHUB_TOKEN" "" }}'
     homepage: https://github.com/arbazkhan971/ffgo
     description: FFmpeg for humans — inspect, convert, compress and edit video with sane commands
     license: MIT
