@@ -19,9 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Test on a current toolchain: Go 1.22 test binaries hit a dyld
+      # "missing LC_UUID" abort on macos-latest's newer linker.
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.22"
+          go-version: "stable"
           cache: true
 
       - name: Install FFmpeg (Linux)
@@ -42,9 +44,8 @@ jobs:
       - name: Vet
         run: go vet ./...
 
-      # The race detector is run on Linux; on macOS the race-instrumented
-      # binary can trip a dyld "missing LC_UUID" abort with some toolchain/
-      # linker combinations, unrelated to the code under test.
+      # The race detector runs on Linux (its canonical platform); the other
+      # OSes run plain tests to keep the matrix fast.
       - name: Test (race)
         if: runner.os == 'Linux'
         run: go test -race -count=1 ./...
