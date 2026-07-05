@@ -55,7 +55,7 @@ FFmpeg command it used so you always know what happened.
 ## Install
 
 <details open>
-<summary><b>Homebrew (macOS / Linux)</b></summary>
+<summary><b>Homebrew (macOS)</b></summary>
 
 ```sh
 brew install arbazkhan971/tap/ffgo
@@ -92,6 +92,19 @@ docker run --rm -v "$PWD:/work" ghcr.io/arbazkhan971/ffgo inspect video.mp4
 
 Grab a single binary for your platform from the [releases page](https://github.com/arbazkhan971/ffgo/releases).
 No runtime, no dependencies — just drop it on your `PATH`.
+</details>
+
+<details>
+<summary><b>Linux packages (deb / rpm / apk)</b></summary>
+
+Download the package for your distro and arch from the
+[latest release](https://github.com/arbazkhan971/ffgo/releases/latest):
+
+```sh
+sudo dpkg -i ffgo_*_linux_amd64.deb    # Debian / Ubuntu
+sudo rpm -i  ffgo_*_linux_amd64.rpm    # Fedora / RHEL
+sudo apk add --allow-untrusted ffgo_*_linux_amd64.apk   # Alpine
+```
 </details>
 
 > **Requirement:** `ffgo` drives FFmpeg, so you need `ffmpeg` and `ffprobe` installed
